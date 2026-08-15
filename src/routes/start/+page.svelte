@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { dataSnippet, planSnippet, saveSnippet } from '$lib/content';
-	import { LINKS } from '$lib/links';
+	import { mcpJson } from '$lib/content';
+	import { INSTALL_CMD, LINKS } from '$lib/links';
 	import { href } from '$lib/paths';
 	import CodeBlock from '$lib/ui/CodeBlock.svelte';
 	import GlassPanel from '$lib/ui/GlassPanel.svelte';
@@ -10,74 +10,101 @@
 	<title>Get started · TheTowerSDK</title>
 </svelte:head>
 
-<p class="text-xs font-semibold tracking-[0.18em] text-accent uppercase">Install</p>
-<h1 class="mt-2 text-3xl font-semibold">Three imports, then a tool</h1>
+<p class="text-xs font-semibold tracking-[0.18em] text-accent uppercase">Start</p>
+<h1 class="mt-2 text-3xl font-semibold">Get started</h1>
 <p class="mt-2 max-w-2xl text-muted">
-	Node 20+. TypeScript. The decoder needs Node (or a browser gunzip + NRBF recipe in the README).
-	Everything else is browser-safe.
+	Configure the package, MCP, and optional AGS before you build. Examples live under
+	<a href={href('/playground/')}>Examples</a>
+	once this is in place.
 </p>
 
-<div class="mt-8 space-y-8 max-w-3xl">
+<div class="mt-8 max-w-3xl space-y-10">
 	<section>
-		<h2 class="text-xl font-medium">1. Install</h2>
+		<h2 class="text-xl font-medium">1. Install TheTowerSDK</h2>
+		<p class="mt-2 text-sm text-muted">
+			Add the package to your app or tool repo. Pin a version when you want frozen game numbers.
+		</p>
 		<div class="mt-3">
-			<CodeBlock code={'npm install thetowersdk'} />
+			<CodeBlock code={INSTALL_CMD} />
 		</div>
 		<p class="mt-2 text-sm text-muted">
-			Also on <a href={LINKS.npm}>npmjs.com/package/thetowersdk</a>. Pin the version if you need
-			reproducible numbers — a minor bump is a new game version.
+			Package:
+			<a href={LINKS.npm}>npmjs.com/package/thetowersdk</a>
+			· source:
+			<a href={LINKS.github}>GitHub</a>
 		</p>
 	</section>
 
 	<section>
-		<h2 class="text-xl font-medium">2. Read a table</h2>
+		<h2 class="text-xl font-medium">2. Register the MCP server</h2>
+		<p class="mt-2 text-sm text-muted">
+			Point Cursor, Claude Code, or Copilot at the package MCP so the assistant can list exports,
+			read catalogs, decode saves, plan Effective Paths, and pull wiki pages — instead of guessing.
+		</p>
 		<div class="mt-3">
-			<CodeBlock code={dataSnippet} />
+			<CodeBlock code={mcpJson} />
 		</div>
+		<p class="mt-2 text-sm text-muted">
+			Put that under your editor’s MCP config (for example Cursor
+			<code>.mcp.json</code>
+			or the IDE MCP settings). Restart the IDE MCP session after saving. Docs:
+			<a href={href('/docs/mcp/')}>MCP &amp; AI</a>.
+		</p>
 	</section>
 
 	<section>
-		<h2 class="text-xl font-medium">3. Read a save</h2>
+		<h2 class="text-xl font-medium">3. Optional — Agent Governance System (AGS)</h2>
 		<p class="mt-2 text-sm text-muted">
-			Android path: <code>Android/data/com.TechTreeGames.TheTower/files/playerInfo.dat</code>.
-			<a href={LINKS.adbBridge}>adb-bridge</a> copies it off a device or emulator.
+			AGS governs how an AI may change your repo (commits, staging, status). Use it when you want
+			structured AI development on Tower tools. TheTowerSDK is the game layer; AGS is the workflow
+			layer.
 		</p>
-		<div class="mt-3">
-			<CodeBlock code={saveSnippet} />
-		</div>
-	</section>
-
-	<section>
-		<h2 class="text-xl font-medium">4. Plan an upgrade path</h2>
-		<p class="mt-2 text-sm text-muted">
-			Config is the account (unlocks, cards, modules). Levels are how far each candidate is already
-			bought. The SDK does not map a save onto either — that mapping is the tool you are writing.
-		</p>
-		<div class="mt-3">
-			<CodeBlock code={planSnippet} />
-		</div>
-	</section>
-</div>
-
-<div class="mt-10 grid gap-4 md:grid-cols-2 max-w-3xl">
-	<GlassPanel>
-		<h2 class="font-medium">Entry points</h2>
-		<ul class="mt-2 space-y-1 font-mono text-sm text-muted">
-			<li>thetowersdk/data</li>
-			<li>thetowersdk/save</li>
-			<li>thetowersdk/node</li>
-			<li>thetowersdk/formatting</li>
-			<li>thetowersdk/mechanics</li>
-			<li>thetowersdk/wiki</li>
+		<ul class="mt-3 list-disc space-y-2 pl-5 text-sm text-muted">
+			<li>
+				Overview:
+				<a href={LINKS.agsSite}>Agent Governance System site</a>
+			</li>
+			<li>
+				How it fits with this package:
+				<a href={href('/docs/ags/')}>AGS docs</a>
+				·
+				<a href={href('/ai/')}>AI &amp; AGS</a>
+			</li>
+			<li>
+				Tower players can request a personal grant with an in-game Player ID:
+				<a href={href('/license/')}>Player license</a>
+			</li>
 		</ul>
-	</GlassPanel>
-	<GlassPanel>
-		<h2 class="font-medium">Next</h2>
-		<ul class="mt-2 space-y-2 text-sm">
-			<li><a href={href('/playground/')}>Exercise the live demos</a></li>
-			<li><a href={href('/ai/')}>Register MCP and paste a prompt</a></li>
-			<li><a href={LINKS.github}>Read the package README</a></li>
-			<li><a href={href('/license/')}>Claim a personal Player ID license</a></li>
-		</ul>
-	</GlassPanel>
+	</section>
+
+	<section>
+		<h2 class="text-xl font-medium">4. Saves from a device (optional)</h2>
+		<p class="mt-2 text-sm text-muted">
+			Android path:
+			<code>Android/data/com.TechTreeGames.TheTower/files/playerInfo.dat</code>.
+			<a href={LINKS.adbBridge}>adb-bridge</a>
+			can copy it from a device or emulator. Decode with
+			<code>thetowersdk/node</code>, then extractors in
+			<code>thetowersdk/save</code>.
+		</p>
+	</section>
+
+	<section>
+		<h2 class="text-xl font-medium">5. Ready to build</h2>
+		<div class="mt-3 grid gap-4 sm:grid-cols-2">
+			<GlassPanel>
+				<h3 class="font-medium">Examples</h3>
+				<p class="mt-2 text-sm text-muted">Interactive demos and sample imports.</p>
+				<p class="mt-3 text-sm"><a href={href('/playground/')}>Open examples →</a></p>
+			</GlassPanel>
+			<GlassPanel>
+				<h3 class="font-medium">Example product</h3>
+				<p class="mt-2 text-sm text-muted">
+					<a href={LINKS.tracker}>The Tower Run Tracker</a>
+					ships calculators and trackers on this package.
+				</p>
+				<p class="mt-3 text-sm"><a href={href('/tools/')}>What you can build →</a></p>
+			</GlassPanel>
+		</div>
+	</section>
 </div>

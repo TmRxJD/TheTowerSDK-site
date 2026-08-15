@@ -13,3 +13,5 @@ export const LINKS = {
 
 export const PACKAGE_NAME = 'thetowersdk';
 export const INSTALL_CMD = 'npm install thetowersdk';
+/** Pinned dependency version from this site’s package.json. */
+export const SDK_VERSION = '0.4.1';

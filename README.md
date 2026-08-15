@@ -1,6 +1,6 @@
 # TheTowerSDK — public showcase
 
-Public site for **[thetowersdk](https://www.npmjs.com/package/thetowersdk)**: game data, save reading, and formulas for *The Tower*, plus how to point an AI at the MCP server.
+Public site for **[thetowersdk](https://www.npmjs.com/package/thetowersdk)**: game data, save reading, and formulas for *The Tower*.
 
 Live: **https://tmrxjd.github.io/TheTowerSDK-site/**
 
@@ -8,25 +8,35 @@ Live: **https://tmrxjd.github.io/TheTowerSDK-site/**
 |---|---|
 | npm | https://www.npmjs.com/package/thetowersdk |
 | SDK source | https://github.com/TmRxJD/TheTowerSDK |
+| Run Tracker (built on this SDK) | https://the-tower-run-tracker.com |
 | AGS public docs | https://github.com/TmRxJD/agent-governance-system-site |
 
 ## Stack
 
-Same family as the AGS public site: **SvelteKit 5 + Tailwind + adapter-static**, GitHub Pages from `build/`.
+SvelteKit 5 + Tailwind + adapter-static, GitHub Pages from `build/`.
 
-## Local
+## Local (port 4173 only — Vite HMR)
+
+This repo owns **http://127.0.0.1:4173/** exclusively. Do not use another port.
+
+Local preview is a **durable Vite dev server with HMR**, started outside the agent shell so it survives Cursor aborting tool runs.
 
 ```sh
 npm install
-npm run dev
+npm run serve          # start HMR if needed; no-op if already healthy
+npm run serve:status   # confirm mode=hmr on 4173
 ```
 
-Production build (Pages uses `BASE_PATH=/TheTowerSDK-site`):
+Open **http://127.0.0.1:4173/** — edits hot-reload. **Do not restart** the server unless `serve:status` says `DOWN`.
 
-```sh
-npm run build
-```
+Agents must never:
 
-## Personal license
+- kill port 4173 / stop the Vite process
+- run `npm run build` or `vite preview` against this port while working locally
+- delete `.svelte-kit` while HMR is up
 
-Tower players can request a free personal grant (AGS Tower Community + Player-ID binding) from `/license/`. The SDK itself remains MIT.
+Production / GitHub Pages builds set `BASE_PATH=/TheTowerSDK-site`. Local HMR always uses empty `BASE_PATH`.
+
+## License
+
+`thetowersdk` is MIT. Tower players can request a free AGS grant (Player ID) from `/license/`.

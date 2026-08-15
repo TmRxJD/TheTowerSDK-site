@@ -23,22 +23,18 @@ export function playerIdHint(raw: string): string | null {
 export function buildLicenseIssueUrl(input: {
 	playerId: string;
 	github: string;
-	discord: string;
-	use: string;
 	repo: string;
 }): string {
-	const title = `Personal license request — Player ID ${normalizePlayerId(input.playerId)}`;
+	const title = `Personal AGS grant — Player ID ${normalizePlayerId(input.playerId)}`;
 	const body = [
-		'## Personal Tower toolkit / AGS community grant',
+		'## Personal AGS grant request',
 		'',
 		`- **Player ID:** \`${normalizePlayerId(input.playerId)}\``,
-		`- **GitHub:** ${input.github.trim() || '(not provided)'}`,
-		`- **Discord:** ${input.discord.trim() || '(not provided)'}`,
+		`- **GitHub:** ${input.github.trim() || '(required)'}`,
 		'',
-		'### Intended use',
-		input.use.trim() || '(not provided)',
+		'I confirm this is for personal, non-commercial Tower work, bound to this Player ID.',
 		'',
-		'I confirm this is for personal, non-commercial Tower work, bound to this Player ID.'
+		'I understand a grant may be declined for accounts with no meaningful play history.'
 	].join('\n');
 
 	const params = new URLSearchParams({ title, body, labels: 'license' });

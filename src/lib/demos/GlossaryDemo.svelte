@@ -1,46 +1,41 @@
 <script lang="ts">
-	import { expandAcronym, lookupGlossary } from 'thetowersdk/data';
+	import { lookupGlossary } from 'thetowersdk/data';
 
-	let query = $state('GT');
-
-	let results = $derived(lookupGlossary(query));
-	let expansion = $derived(expandAcronym(query));
+	let query = $state('CF');
+	let hits = $derived(lookupGlossary(query.trim()));
 </script>
 
 <div>
-	<label class="block text-sm text-muted" for="glossary-q">Look up a term the game uses</label>
+	<label class="block text-sm text-muted" for="glossary-q">Tower acronym or term</label>
 	<input
 		id="glossary-q"
-		class="mt-1 w-full rounded-md border border-line bg-bg px-3 py-2 font-mono text-fg"
+		class="mt-1 w-full rounded-md border border-line bg-bg px-3 py-2 text-fg"
 		bind:value={query}
-		placeholder="GT, CF, ILM, SR…"
+		placeholder="CF, GT, DW, ELS…"
 		autocomplete="off"
 		spellcheck="false"
 	/>
-	<p class="mt-2 text-sm text-muted">
-		{#if expansion}
-			<code>{query.trim()}</code> expands to <span class="text-gold">{expansion}</span>
-		{:else}
-			Not an acronym, or more than one expansion — read the rows.
-		{/if}
-	</p>
-	<ul class="mt-3 space-y-2">
-		{#each results as entry (entry.term + entry.domain)}
-			<li class="rounded-md border border-line/70 bg-bg/40 p-3">
-				<div class="flex flex-wrap items-baseline gap-2">
-					<span class="font-mono text-accent">{entry.term}</span>
-					<span class="text-xs uppercase tracking-wide text-muted">{entry.domain}</span>
-					{#if entry.ambiguous}
-						<span class="text-xs text-gold">ambiguous</span>
+	<ul class="mt-3 divide-y divide-line/70 rounded-md border border-line/70">
+		{#each hits as hit, i (hit.term + hit.domain + i)}
+			<li class="px-3 py-2">
+				<p class="font-medium">
+					{hit.term}
+					{#if hit.expansion}
+						<span class="text-muted"> — {hit.expansion}</span>
 					{/if}
-				</div>
-				{#if entry.expansion}
-					<p class="mt-1 text-sm text-fg">{entry.expansion}</p>
+				</p>
+				{#if hit.domain}
+					<p class="text-xs text-accent">{hit.domain}</p>
 				{/if}
-				<p class="mt-1 text-sm text-muted">{entry.definition}</p>
+				{#if hit.definition}
+					<p class="mt-1 text-sm text-muted">{hit.definition}</p>
+				{/if}
+				{#if hit.source}
+					<p class="mt-1 text-xs text-muted">Source: {hit.source}</p>
+				{/if}
 			</li>
 		{:else}
-			<li class="text-sm text-muted">Nothing in the glossary for that. Try GT, BH, or Coin Bonus.</li>
+			<li class="px-3 py-2 text-sm text-muted">No match.</li>
 		{/each}
 	</ul>
 </div>

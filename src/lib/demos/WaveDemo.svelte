@@ -1,43 +1,73 @@
 <script lang="ts">
+	import { TIERS } from 'thetowersdk/data';
 	import { computeWaveBaseDamage, computeWaveBaseHealth } from 'thetowersdk/mechanics';
 	import { formatNumberForDisplay } from 'thetowersdk/formatting';
 
-	let tier = $state(10);
-	let wave = $state(4500);
-	let tournament = $state(false);
+	/** Farm tiers plus tournament league bases (tier+), selectable as distinct rows. */
+	const tierOptions = [
+		...TIERS.map((tier) => ({
+			id: `farm-${tier}`,
+			label: `Tier ${tier}`,
+			tier,
+			tournament: false
+		})),
+		{ id: 'tour-copper', label: 'Copper (T1+)', tier: 1, tournament: true },
+		{ id: 'tour-silver', label: 'Silver (T3+)', tier: 3, tournament: true },
+		{ id: 'tour-gold', label: 'Gold (T5+)', tier: 5, tournament: true },
+		{ id: 'tour-platinum', label: 'Platinum (T8+)', tier: 8, tournament: true },
+		{ id: 'tour-champion', label: 'Champion (T12+)', tier: 12, tournament: true },
+		{ id: 'tour-legend', label: 'Legend (T17+)', tier: 17, tournament: true }
+	] as const;
+
+	const waveOptions = [100, 500, 1000, 2500, 4500, 7500, 10000, 15000, 20000] as const;
+
+	let tierId = $state('farm-10');
+	let wave = $state('4500');
+
+	let selected = $derived(tierOptions.find((o) => o.id === tierId) ?? tierOptions[0]);
 
 	let hp = $derived(
-		formatNumberForDisplay(computeWaveBaseHealth({ tier, wave, tournament }))
+		formatNumberForDisplay(
+			computeWaveBaseHealth({
+				tier: selected.tier,
+				wave: Number(wave),
+				tournament: selected.tournament
+			})
+		)
 	);
 	let damage = $derived(
-		formatNumberForDisplay(computeWaveBaseDamage({ tier, wave, tournament }))
+		formatNumberForDisplay(
+			computeWaveBaseDamage({
+				tier: selected.tier,
+				wave: Number(wave),
+				tournament: selected.tournament
+			})
+		)
 	);
 </script>
 
-<div class="grid gap-4 sm:grid-cols-3">
+<div class="grid gap-4 sm:grid-cols-2">
 	<label class="block text-sm text-muted">
 		Tier
-		<input
-			class="mt-1 w-full rounded-md border border-line bg-bg px-3 py-2 font-mono text-fg"
-			type="number"
-			min="1"
-			max="18"
-			bind:value={tier}
-		/>
+		<select
+			class="mt-1 w-full rounded-md border border-line bg-bg px-3 py-2 text-fg"
+			bind:value={tierId}
+		>
+			{#each tierOptions as option (option.id)}
+				<option value={option.id}>{option.label}</option>
+			{/each}
+		</select>
 	</label>
 	<label class="block text-sm text-muted">
 		Wave
-		<input
-			class="mt-1 w-full rounded-md border border-line bg-bg px-3 py-2 font-mono text-fg"
-			type="number"
-			min="1"
-			max="20000"
+		<select
+			class="mt-1 w-full rounded-md border border-line bg-bg px-3 py-2 text-fg"
 			bind:value={wave}
-		/>
-	</label>
-	<label class="flex items-end gap-2 pb-2 text-sm text-muted">
-		<input type="checkbox" bind:checked={tournament} />
-		Tournament
+		>
+			{#each waveOptions as option (option)}
+				<option value={String(option)}>{option}</option>
+			{/each}
+		</select>
 	</label>
 </div>
 
@@ -51,8 +81,3 @@
 		<dd class="font-mono text-2xl text-accent">{damage}</dd>
 	</div>
 </dl>
-<p class="mt-3 text-xs text-muted">
-	Live <code>computeWaveBaseHealth</code> / <code>computeWaveBaseDamage</code> from
-	<code>thetowersdk/mechanics</code>, formatted the way the game shows numbers. These are
-	fitted approximations — close, not last-digit exact.
-</p>

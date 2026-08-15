@@ -7,66 +7,85 @@
 </script>
 
 <svelte:head>
-	<title>Direct an AI · TheTowerSDK</title>
+	<title>AI &amp; AGS · TheTowerSDK</title>
 </svelte:head>
 
-<p class="text-xs font-semibold tracking-[0.18em] text-accent uppercase">Agents</p>
-<h1 class="mt-2 text-3xl font-semibold">Make the agent look the mechanic up</h1>
+<p class="text-xs font-semibold tracking-[0.18em] text-accent uppercase">Assistants</p>
+<h1 class="mt-2 text-3xl font-semibold">AI &amp; Agent Governance</h1>
 <p class="mt-2 max-w-2xl text-muted">
-	The data says what a number <em>is</em>. It does not say what it means. An agent that skips the
-	wiki will invent unlocks. The MCP server is how you stop that — Cursor, Claude Code, Copilot, any
-	stdio client.
+	Install TheTowerSDK, connect an AI coding assistant through MCP, and optionally add Agent Governance
+	System so the assistant stays structured while it builds.
 </p>
 
-<section class="mt-8">
-	<h2 class="text-xl font-medium">1. Register the MCP server</h2>
+<section class="mt-10">
+	<h2 class="text-xl font-medium">1. Connect an AI to the package</h2>
 	<p class="mt-2 max-w-2xl text-sm text-muted">
-		After <code>npm install thetowersdk</code>, point the client at the server that ships in the
-		package. It can list exports, preview a table, define an acronym, decode a save, and plan an
-		Effective Path without a scratch script.
+		After <code>npm install thetowersdk</code>, register this MCP server. The assistant can list
+		exports, read catalogs, decode saves, plan paths, and fetch wiki pages.
 	</p>
 	<div class="mt-4 max-w-3xl">
 		<CodeBlock code={mcpJson} />
 	</div>
 	<p class="mt-3 text-sm text-muted">
-		Claude Code: <code>claude mcp add thetowersdk -- node ./node_modules/thetowersdk/mcp/server.mjs</code>
+		Claude Code:
+		<code>claude mcp add thetowersdk -- node ./node_modules/thetowersdk/mcp/server.mjs</code>
 	</p>
 </section>
 
-<section class="mt-10">
-	<h2 class="text-xl font-medium">2. Paste a prompt that names the package</h2>
-	<p class="mt-2 max-w-2xl text-sm text-muted">
-		The useful sentence is “use thetowersdk, do not invent exports.” These four are enough to see
-		whether the agent is actually calling the MCP tools.
+	<section class="mt-10">
+		<h2 class="text-xl font-medium">2. Ask it to design tools</h2>
+		<p class="mt-2 max-w-2xl text-sm text-muted">
+			Sample asks below. With TheTowerSDK MCP and AGS, the agent researches the mechanic, confirms
+			package exports, builds the tool, then checkpoints — wiki and catalogs first, UI second.
+		</p>
+		<div class="mt-6 grid gap-4">
+			{#each agentPrompts as item (item.title)}
+				<GlassPanel>
+					<h3 class="font-medium">{item.title}</h3>
+					<p class="mt-3 text-xs font-semibold tracking-wide text-accent uppercase">You ask</p>
+					<div class="mt-2">
+						<CodeBlock code={item.prompt} />
+					</div>
+					<p class="mt-4 text-xs font-semibold tracking-wide text-gold uppercase">
+						What the agent does
+					</p>
+					<pre
+						class="mt-2 overflow-x-auto rounded-md border border-line/70 bg-bg/40 p-3 font-mono text-xs text-fg/90 whitespace-pre-wrap"
+					>{item.result}</pre>
+				</GlassPanel>
+			{/each}
+		</div>
+	</section>
+
+<section id="ags" class="mt-14 scroll-mt-24">
+	<p class="text-xs font-semibold tracking-[0.18em] text-gold uppercase">AGS</p>
+	<h2 class="mt-2 text-2xl font-semibold">Agent Governance System</h2>
+	<p class="mt-3 max-w-2xl text-muted">
+		AGS sits next to the assistant and governs how it may change your repo — checkpoints, staging,
+		clear status. TheTowerSDK supplies Tower knowledge; AGS supplies the workflow. Tower players can
+		request personal access with a Player ID.
 	</p>
-	<div class="mt-6 grid gap-4">
-		{#each agentPrompts as item (item.title)}
-			<GlassPanel>
-				<h3 class="font-medium">{item.title}</h3>
-				<div class="mt-3">
-					<CodeBlock code={item.prompt} />
-				</div>
-			</GlassPanel>
-		{/each}
+
+	<div class="mt-6 grid gap-4 md:grid-cols-2">
+		<GlassPanel>
+			<h3 class="font-medium">TheTowerSDK</h3>
+			<p class="mt-2 text-sm text-muted">
+				Game data, save reading, formulas, wiki text, and the MCP server above.
+			</p>
+			<p class="mt-3 text-sm"><a href={LINKS.github}>Package on GitHub</a></p>
+		</GlassPanel>
+		<GlassPanel>
+			<h3 class="font-medium">Agent Governance System</h3>
+			<p class="mt-2 text-sm text-muted">
+				Rules and tooling for AI-driven edits. Full overview on the AGS site.
+			</p>
+			<p class="mt-3 text-sm"><a href={LINKS.agsSite}>Agent Governance System</a></p>
+		</GlassPanel>
 	</div>
-</section>
 
-<section class="mt-10 max-w-2xl">
-	<h2 class="text-xl font-medium">3. What the agent should do instead of guessing</h2>
-	<ol class="mt-3 list-decimal space-y-2 pl-5 text-sm text-muted">
-		<li><code>list_exports</code> / <code>get_export</code> — the name exists, or it does not.</li>
-		<li><code>wiki_page</code> on every related title before describing behaviour.</li>
-		<li><code>define_term</code> for acronyms; check ambiguity before picking Chrono Field.</li>
-		<li><code>plan_effective_path</code> to see candidates and exclusions, not to scrape a spreadsheet.</li>
-		<li>If a value is missing, say so. Silent zeros are how wrong tools look finished.</li>
-	</ol>
-	<p class="mt-4 text-sm">
-		<a href={LINKS.github}>AGENTS.md in the package</a> is the instruction file. Drop it in the repo
-		you are generating into.
-	</p>
-	<p class="mt-2 text-sm">
-		For commit discipline and schema gates while the agent works, use
-		<a href={href('/ags/')}>Agent Governance System</a> — Tower players can claim a personal grant
-		with a validated Player ID.
+	<p class="mt-6 text-sm">
+		<a href={href('/docs/ags/')}>Full AGS &amp; licensing docs →</a>
+		·
+		<a href={href('/license/')}>Request personal AGS →</a>
 	</p>
 </section>

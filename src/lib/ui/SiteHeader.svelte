@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { nav } from '$lib/content';
-	import { href } from '$lib/paths';
+	import { asset, href } from '$lib/paths';
 
 	let open = $state(false);
 
@@ -15,10 +15,13 @@
 	<div class="mx-auto max-w-6xl px-4 py-3">
 		<div class="flex items-center justify-between gap-4">
 			<a href={href('/')} class="flex items-center gap-2 text-fg no-underline">
-				<span
-					class="grid h-8 w-8 place-items-center rounded-md bg-accent-dim font-mono text-sm font-semibold text-accent"
-					aria-hidden="true">T</span
-				>
+				<img
+					src={asset('/TheTowerSDK_logo.v5.png')}
+					alt=""
+					class="h-8 w-8 object-contain"
+					width="32"
+					height="32"
+				/>
 				<span class="font-semibold tracking-tight">TheTowerSDK</span>
 			</a>
 

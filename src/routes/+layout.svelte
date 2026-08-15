@@ -11,7 +11,7 @@
 	const home = href('/');
 	const title = $derived(
 		page.url.pathname === home || page.url.pathname === home.replace(/\/$/, '')
-			? 'TheTowerSDK — build Tower tools from real game data'
+			? 'TheTowerSDK'
 			: 'TheTowerSDK'
 	);
 </script>
@@ -21,7 +21,7 @@
 	<title>{title}</title>
 	<meta
 		name="description"
-		content="TheTowerSDK: typed game tables, save-file readers, and formulas for The Tower. Point an AI at the MCP server and it builds calculators without inventing numbers."
+		content="Game catalogs and formulas for The Tower. Build calculators, trackers, spreadsheets, charts, read save files, connect to emulators and more."
 	/>
 	<meta name="theme-color" content="#0f1419" />
 </svelte:head>

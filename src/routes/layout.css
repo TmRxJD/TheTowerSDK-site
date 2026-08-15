@@ -39,6 +39,26 @@ a {
 	color: var(--color-accent);
 }
 
+/* CTA links need readable text — global `a` color would make blue-on-blue. */
+a.btn-primary {
+	color: #0b1220;
+	background: var(--color-accent);
+	text-decoration: none;
+}
+a.btn-primary:hover {
+	filter: brightness(1.08);
+}
+
+a.btn-secondary {
+	color: var(--color-fg);
+	background: transparent;
+	border: 1px solid var(--color-line);
+	text-decoration: none;
+}
+a.btn-secondary:hover {
+	border-color: var(--color-accent);
+}
+
 code,
 pre {
 	font-family: var(--font-mono);

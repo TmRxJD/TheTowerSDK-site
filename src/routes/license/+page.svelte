@@ -10,18 +10,14 @@
 
 	let playerId = $state('');
 	let github = $state('');
-	let discord = $state('');
-	let use = $state('');
 
 	let hint = $derived(playerIdHint(playerId));
-	let valid = $derived(isValidPlayerId(playerId));
+	let valid = $derived(isValidPlayerId(playerId) && github.trim().length > 0);
 
 	function requestLicense() {
 		const url = buildLicenseIssueUrl({
 			playerId,
 			github,
-			discord,
-			use,
 			repo: LINKS.siteRepo
 		});
 		window.open(url, '_blank', 'noopener,noreferrer');
@@ -29,49 +25,47 @@
 </script>
 
 <svelte:head>
-	<title>Personal license · TheTowerSDK</title>
+	<title>Player license · TheTowerSDK</title>
 </svelte:head>
 
-<p class="text-xs font-semibold tracking-[0.18em] text-gold uppercase">License</p>
-<h1 class="mt-2 text-3xl font-semibold">Personal version, free, bound to your Player ID</h1>
+<p class="text-xs font-semibold tracking-[0.18em] text-gold uppercase">Players</p>
+<h1 class="mt-2 text-3xl font-semibold">Player license</h1>
 <p class="mt-2 max-w-2xl text-muted">
-	<code>thetowersdk</code> itself is MIT — anyone can install it. The <strong>personal grant</strong>
-	is for Tower players who want a licensed, Player-ID-validated toolkit: community AGS (so your
-	agents cannot silently skip the rules) plus recognition that this copy is yours, not a shared
-	drop.
+	TheTowerSDK itself is free for everyone to install and use — community tools, personal projects, or
+	commercial apps.
+</p>
+<p class="mt-3 max-w-2xl text-muted">
+	Separately, Tower players can get <strong>Agent Governance System</strong> for free for personal,
+	non-commercial Tower work. That grant is tied to your in-game Player ID.
 </p>
 
-<div class="mt-8 grid gap-4 md:grid-cols-3">
+<div class="mt-8 grid gap-4 md:grid-cols-2">
 	<GlassPanel>
-		<p class="text-xs uppercase tracking-wide text-muted">SDK</p>
-		<p class="mt-1 font-medium">MIT for everyone</p>
+		<p class="text-xs uppercase tracking-wide text-muted">TheTowerSDK</p>
+		<p class="mt-1 font-medium">Free for everyone</p>
 		<p class="mt-2 text-sm text-muted">
-			Build open or closed source. Commercial tools are fine under MIT. That does not relicense AGS.
+			Install from npm and build. No Player ID needed for the SDK.
 		</p>
 	</GlassPanel>
 	<GlassPanel>
-		<p class="text-xs uppercase tracking-wide text-gold">Personal grant</p>
-		<p class="mt-1 font-medium">Free for Tower players</p>
+		<p class="text-xs uppercase tracking-wide text-gold">AGS for Tower players</p>
+		<p class="mt-1 font-medium">Personal grant</p>
 		<p class="mt-2 text-sm text-muted">
-			One Player ID, one person, non-commercial local use. We validate the ID against The Tower
-			before the grant is issued.
+			Optional AI governance tooling for your own local Tower projects. Not the same thing as the
+			SDK.
 		</p>
-	</GlassPanel>
-	<GlassPanel>
-		<p class="text-xs uppercase tracking-wide text-accent">AGS</p>
-		<p class="mt-1 font-medium">Tower Community license</p>
-		<p class="mt-2 text-sm text-muted">
-			Same Player ID unlocks Agent Governance System for Tower work. Details on the
-			<a href={href('/ags/')}>AGS page</a>.
-		</p>
+		<p class="mt-3 text-sm"><a href={href('/ai/#ags')}>How AI &amp; AGS fit together →</a></p>
 	</GlassPanel>
 </div>
 
 <section class="mt-10 max-w-xl">
-	<h2 class="text-xl font-medium">Claim with your Player ID</h2>
+	<h2 class="text-xl font-medium">Request free personal AGS</h2>
 	<p class="mt-2 text-sm text-muted">
-		In The Tower: Settings → Player ID (digits). We use it only to confirm you are a real player and
-		to bind the grant. It is not sold or posted.
+		In The Tower: Settings → Player ID (digits). Used only to confirm you play and to bind the
+		grant.
+	</p>
+	<p class="mt-2 text-sm text-muted">
+		A key may not be granted to accounts with no meaningful play history.
 	</p>
 
 	<form
@@ -101,36 +95,19 @@
 				class="mt-1 w-full rounded-md border border-line bg-bg px-3 py-2 text-fg"
 				bind:value={github}
 				autocomplete="username"
-				placeholder="TmRxJD"
+				placeholder="your-github"
+				required
 			/>
-		</label>
-		<label class="block text-sm">
-			<span class="text-muted">Discord (optional)</span>
-			<input
-				class="mt-1 w-full rounded-md border border-line bg-bg px-3 py-2 text-fg"
-				bind:value={discord}
-				placeholder="name"
-			/>
-		</label>
-		<label class="block text-sm">
-			<span class="text-muted">What you want to build</span>
-			<textarea
-				class="mt-1 w-full rounded-md border border-line bg-bg px-3 py-2 text-fg"
-				rows="4"
-				bind:value={use}
-				placeholder="Personal lab planner, Discord helper for my guild, …"
-			></textarea>
 		</label>
 		<button
 			type="submit"
 			class="rounded-md bg-gold px-4 py-2 font-medium text-bg disabled:opacity-40"
 			disabled={!valid}
 		>
-			Open a license request
+			Submit AGS request
 		</button>
 		<p class="text-xs text-muted">
-			Opens a GitHub issue on {LINKS.siteRepo} with your Player ID. Issuing the grant is manual until
-			the validation service is live — the ID format is checked here first.
+			Opens a GitHub issue with your Player ID and GitHub username. Requests are reviewed by hand.
 		</p>
 	</form>
 </section>

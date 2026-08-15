@@ -4,9 +4,13 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"dev": "vite dev",
+		"dev": "node scripts/dev-supervisor.mjs",
 		"build": "vite build",
-		"preview": "vite preview",
+		"preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
+		"serve": "node scripts/ensure-preview.mjs",
+		"serve:status": "node scripts/serve-status.mjs",
+		"overlay:labs": "node scripts/overlay-labs-catalog.mjs",
+		"preview:local": "node scripts/ensure-preview.mjs",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -28,6 +32,8 @@
 		"prettier": "^3.8.3",
 		"prettier-plugin-svelte": "^4.1.0",
 		"prettier-plugin-tailwindcss": "^0.8.0",
+		"sirv": "^3.0.2",
+		"sirv-cli": "^3.0.1",
 		"svelte": "^5.56.1",
 		"svelte-check": "^4.6.0",
 		"tailwindcss": "^4.3.0",
@@ -36,6 +42,6 @@
 		"vite": "^8.0.16"
 	},
 	"dependencies": {
-		"thetowersdk": "^0.4.1"
+		"thetowersdk": "0.4.1"
 	}
 }
