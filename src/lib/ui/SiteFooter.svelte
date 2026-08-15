@@ -23,11 +23,10 @@
 		<nav class="flex flex-col gap-1" aria-label="Site">
 			<p class="mb-1 text-xs font-semibold tracking-wide text-fg uppercase">Site</p>
 			<a href={href('/start/')}>Get started</a>
-			<a href={href('/docs/')}>Docs</a>
-			<a href={href('/playground/')}>Examples</a>
 			<a href={href('/tools/')}>What you can build</a>
+			<a href={href('/playground/')}>Examples</a>
+			<a href={href('/docs/')}>Docs</a>
 			<a href={href('/ai/')}>AI &amp; AGS</a>
-			<a href={href('/license/')}>Player license</a>
 		</nav>
 		<nav class="flex flex-col gap-1" aria-label="Related">
 			<p class="mb-1 text-xs font-semibold tracking-wide text-fg uppercase">Related</p>

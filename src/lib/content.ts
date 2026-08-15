@@ -1,10 +1,9 @@
 export const nav = [
 	{ href: '/start/', label: 'Get started' },
-	{ href: '/docs/', label: 'Docs' },
-	{ href: '/playground/', label: 'Examples' },
 	{ href: '/tools/', label: 'What you can build' },
-	{ href: '/ai/', label: 'AI & AGS' },
-	{ href: '/license/', label: 'Player license' }
+	{ href: '/playground/', label: 'Examples' },
+	{ href: '/docs/', label: 'Docs' },
+	{ href: '/ai/', label: 'AI & AGS' }
 ] as const;
 
 export const docsNav = [

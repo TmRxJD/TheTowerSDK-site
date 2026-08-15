@@ -31,11 +31,14 @@ Open **http://127.0.0.1:4173/** — edits hot-reload. **Do not restart** the ser
 
 Agents must never:
 
-- kill port 4173 / stop the Vite process
-- run `npm run build` or `vite preview` against this port while working locally
+- kill port 4173 / stop the Vite or HMR supervisor process
+- run `npm ci` / `npm install` / wipe `node_modules` or `.svelte-kit` while HMR is up (crashes Vite via locked native addons)
+- run `vite preview` against this port while working locally
 - delete `.svelte-kit` while HMR is up
 
-Production / GitHub Pages builds set `BASE_PATH=/TheTowerSDK-site`. Local HMR always uses empty `BASE_PATH`.
+Production / GitHub Pages builds set `BASE_PATH=/TheTowerSDK-site`. Local HMR always uses empty `BASE_PATH`. Verify deploys in **GitHub Actions**, not by reinstalling locally.
+
+Enforcement: `.cursor/hooks.json` + `.cursor/hooks/block-preview-server.mjs` (reload Cursor window after clone).
 
 ## License
 

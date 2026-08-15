@@ -65,7 +65,7 @@
 			class="mt-1 w-full rounded-md border border-line bg-bg px-3 py-2 text-fg"
 			bind:value={labName}
 		>
-			{#each LAB_CATALOG as option (option.slug)}
+			{#each LAB_CATALOG as option, i (`${option.slug}-${i}`)}
 				<option value={option.name}>{option.name}</option>
 			{/each}
 		</select>

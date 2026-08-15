@@ -35,7 +35,9 @@ export default defineConfig({
 				strict: true
 			}),
 			paths: {
-				base: githubPagesBase()
+				base: githubPagesBase(),
+				// Absolute asset URLs — relative `./_app` breaks more easily under base-path hosting.
+				relative: false
 			}
 		})
 	]

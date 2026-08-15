@@ -1,27 +1,12 @@
 <script lang="ts">
-	import { packageContents } from '$lib/sdk-stats';
 	import { features, homeExamples, installSnippet } from '$lib/content';
 	import { LINKS } from '$lib/links';
 	import { asset, href } from '$lib/paths';
 	import CodeBlock from '$lib/ui/CodeBlock.svelte';
 	import GlassPanel from '$lib/ui/GlassPanel.svelte';
 	import InstallCmd from '$lib/ui/InstallCmd.svelte';
-	import LabsDemo from '$lib/demos/LabsDemo.svelte';
-	import SyncUptimeDemo from '$lib/demos/SyncUptimeDemo.svelte';
-	import WaveDemo from '$lib/demos/WaveDemo.svelte';
-	import SaveDemo from '$lib/demos/SaveDemo.svelte';
 
-	const demos = [
-		{ title: homeExamples[0].title, blurb: homeExamples[0].blurb, Demo: LabsDemo, panel: 'Live' },
-		{
-			title: homeExamples[1].title,
-			blurb: homeExamples[1].blurb,
-			Demo: SyncUptimeDemo,
-			panel: 'Live'
-		},
-		{ title: homeExamples[2].title, blurb: homeExamples[2].blurb, Demo: WaveDemo, panel: 'Live' },
-		{ title: homeExamples[3].title, blurb: homeExamples[3].blurb, Demo: SaveDemo, panel: 'Sample' }
-	] as const;
+	let { data } = $props();
 </script>
 
 <section class="max-w-3xl">
@@ -67,7 +52,7 @@
 		Counts from the installed package — including the detailed pieces inside each system.
 	</p>
 	<div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-		{#each packageContents as item (item.label)}
+		{#each data.packageContents as item (item.label)}
 			<div class="rounded-lg border border-line/80 bg-panel/50 px-3 py-3">
 				<p class="font-mono text-xl text-gold">{item.value}</p>
 				<p class="mt-0.5 text-sm text-muted">{item.label}</p>
@@ -90,31 +75,23 @@
 
 <section class="mt-14">
 	<h2 class="text-2xl font-semibold">Examples</h2>
+	<p class="mt-2 max-w-2xl text-sm text-muted">
+		Code from the package. Interactive demos live on the
+		<a href={href('/playground/')}>Examples</a> page so this home page stays light.
+	</p>
 	<div class="mt-6 space-y-8">
-		{#each demos as demo, i (demo.title)}
-			{@const example = homeExamples[i]}
-			{@const Demo = demo.Demo}
+		{#each homeExamples as example (example.title)}
 			<div>
-				<h3 class="text-lg font-medium">{demo.title}</h3>
-				<p class="mt-1 mb-4 text-sm text-muted">{demo.blurb}</p>
-				<div class="grid gap-4 lg:grid-cols-2">
-					<GlassPanel>
-						<p class="mb-3 text-xs font-semibold tracking-wide text-accent uppercase">
-							{demo.panel}
-						</p>
-						<Demo />
-					</GlassPanel>
-					<GlassPanel>
-						<p class="mb-3 text-xs font-semibold tracking-wide text-accent uppercase">Code</p>
-						{#if example}
-							<CodeBlock code={example.code} />
-						{/if}
-					</GlassPanel>
-				</div>
+				<h3 class="text-lg font-medium">{example.title}</h3>
+				<p class="mt-1 mb-4 text-sm text-muted">{example.blurb}</p>
+				<GlassPanel>
+					<p class="mb-3 text-xs font-semibold tracking-wide text-accent uppercase">Code</p>
+					<CodeBlock code={example.code} />
+				</GlassPanel>
 			</div>
 		{/each}
 	</div>
-	<p class="mt-4 text-sm"><a href={href('/playground/')}>More examples →</a></p>
+	<p class="mt-4 text-sm"><a href={href('/playground/')}>Try the interactive examples →</a></p>
 </section>
 
 <section class="mt-14">

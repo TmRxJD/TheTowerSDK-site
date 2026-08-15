@@ -42,7 +42,18 @@
 			<div class="grid gap-4 lg:grid-cols-2">
 				<GlassPanel>
 					<p class="mb-3 text-xs font-semibold tracking-wide text-accent uppercase">{item.panel}</p>
-					<Demo />
+					<svelte:boundary>
+						{#snippet failed(error)}
+							<p class="text-sm text-muted">
+								This demo failed to load
+								{#if error instanceof Error}
+									({error.message})
+								{/if}
+								. The code sample still works.
+							</p>
+						{/snippet}
+						<Demo />
+					</svelte:boundary>
 				</GlassPanel>
 				<GlassPanel>
 					<p class="mb-3 text-xs font-semibold tracking-wide text-accent uppercase">Code</p>
