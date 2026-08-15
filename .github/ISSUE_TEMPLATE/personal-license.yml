@@ -1,0 +1,41 @@
+name: Personal license request
+description: Claim a free personal Tower toolkit / AGS community grant with your Player ID
+title: 'Personal license request — Player ID '
+labels: [license]
+body:
+  - type: input
+    id: player_id
+    attributes:
+      label: Tower Player ID
+      description: Digits from The Tower → Settings → Player ID
+      placeholder: '12345678'
+    validations:
+      required: true
+  - type: input
+    id: github
+    attributes:
+      label: GitHub username
+    validations:
+      required: false
+  - type: input
+    id: discord
+    attributes:
+      label: Discord
+    validations:
+      required: false
+  - type: textarea
+    id: use
+    attributes:
+      label: Intended use
+      description: Personal, non-commercial Tower work only
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirm
+      options:
+        - label: I play The Tower and this Player ID is mine. The grant is personal and non-transferable.
+          required: true
+        - label: I will not redistribute Agent Governance System or use it commercially under this grant.
+          required: true
