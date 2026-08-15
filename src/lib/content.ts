@@ -111,6 +111,8 @@ export const capabilityStats = [
 	{ value: '32', label: 'save extractors over playerInfo.dat' },
 	{ value: '1,132', label: 'formula exports in thetowersdk/mechanics' }
 ] as const;
+
+export const mcpJson = `{
   "mcpServers": {
     "thetowersdk": {
       "command": "node",
