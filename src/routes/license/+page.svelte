@@ -29,13 +29,13 @@
 </svelte:head>
 
 <p class="text-xs font-semibold tracking-[0.18em] text-gold uppercase">Players</p>
-<h1 class="mt-2 text-3xl font-semibold">Player license</h1>
+<h1 class="mt-2 text-3xl font-semibold">Player License</h1>
 <p class="mt-2 max-w-2xl text-muted">
 	TheTowerSDK itself is free for everyone to install and use — community tools, personal projects, or
 	commercial apps.
 </p>
 <p class="mt-3 max-w-2xl text-muted">
-	Separately, Tower players can get <strong>Agent Governance System</strong> for free for personal,
+	Separately, Tower players can get <strong>Agentic Cognition Substrate</strong> for free for personal,
 	non-commercial Tower work. That grant is tied to your in-game Player ID.
 </p>
 
@@ -48,18 +48,18 @@
 		</p>
 	</GlassPanel>
 	<GlassPanel>
-		<p class="text-xs uppercase tracking-wide text-gold">AGS for Tower players</p>
+		<p class="text-xs uppercase tracking-wide text-gold">ACS for Tower players</p>
 		<p class="mt-1 font-medium">Personal grant</p>
 		<p class="mt-2 text-sm text-muted">
 			Optional AI governance tooling for your own local Tower projects. Not the same thing as the
 			SDK.
 		</p>
-		<p class="mt-3 text-sm"><a href={href('/ai/#ags')}>How AI &amp; AGS fit together →</a></p>
+		<p class="mt-3 text-sm"><a href={href('/ai/#ags')}>How AI &amp; ACS Fit Together →</a></p>
 	</GlassPanel>
 </div>
 
 <section class="mt-10 max-w-xl">
-	<h2 class="text-xl font-medium">Request free personal AGS</h2>
+	<h2 class="text-xl font-medium">Request Free Personal ACS</h2>
 	<p class="mt-2 text-sm text-muted">
 		In The Tower: Settings → Player ID (digits). Used only to confirm you play and to bind the
 		grant.
@@ -104,7 +104,7 @@
 			class="rounded-md bg-gold px-4 py-2 font-medium text-bg disabled:opacity-40"
 			disabled={!valid}
 		>
-			Submit AGS request
+			Submit ACS request
 		</button>
 		<p class="text-xs text-muted">
 			Opens a GitHub issue with your Player ID and GitHub username. Requests are reviewed by hand.

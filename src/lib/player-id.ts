@@ -25,9 +25,9 @@ export function buildLicenseIssueUrl(input: {
 	github: string;
 	repo: string;
 }): string {
-	const title = `Personal AGS grant — Player ID ${normalizePlayerId(input.playerId)}`;
+	const title = `Personal ACS grant — Player ID ${normalizePlayerId(input.playerId)}`;
 	const body = [
-		'## Personal AGS grant request',
+		'## Personal ACS grant request',
 		'',
 		`- **Player ID:** \`${normalizePlayerId(input.playerId)}\``,
 		`- **GitHub:** ${input.github.trim() || '(required)'}`,

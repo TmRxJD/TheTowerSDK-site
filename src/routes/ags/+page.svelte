@@ -3,11 +3,11 @@
 </script>
 
 <svelte:head>
-	<title>AGS · TheTowerSDK</title>
+	<title>ACS · TheTowerSDK</title>
 	<meta http-equiv="refresh" content="0;url={href('/ai/#ags')}" />
 </svelte:head>
 
 <p class="text-muted">
-	AGS lives with the AI section now.
-	<a href={href('/ai/#ags')}>Go to AI &amp; AGS →</a>
+	ACS lives with the AI section now.
+	<a href={href('/ai/#ags')}>Go To AI &amp; ACS →</a>
 </p>

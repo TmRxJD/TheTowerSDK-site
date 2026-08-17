@@ -20,9 +20,9 @@
 	<CodeBlock code={planSnippet} />
 </div>
 
-<h2 class="mt-8 text-xl font-medium">Uptime-style sync</h2>
+<h2 class="mt-8 text-xl font-medium">Uptime-style Sync</h2>
 <p class="mt-2 text-sm text-muted">
 	Combine UW cooldowns (for example Death Wave from stones) with in-game bot catalog timing (Golden
 	Bot duration / cooldown) to answer sync questions.
 </p>
-<p class="mt-4 text-sm"><a href={href('/playground/')}>Live formula examples →</a></p>
+<p class="mt-4 text-sm"><a href={href('/playground/')}>Live Formula Examples →</a></p>

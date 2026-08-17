@@ -10,7 +10,7 @@
 <h1 class="text-3xl font-semibold">Wiki</h1>
 <p class="mt-3 text-muted">
 	The Tower wiki lives on Fandom as wikitext. The package converts pages to Markdown so apps and
-	assistants can read behaviour text without scraping by hand.
+	assistants can read behavior text without scraping by hand.
 </p>
 
 <div class="mt-6">

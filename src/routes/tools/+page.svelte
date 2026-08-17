@@ -10,7 +10,7 @@
 </svelte:head>
 
 <p class="text-xs font-semibold tracking-[0.18em] text-accent uppercase">Build</p>
-<h1 class="mt-2 text-3xl font-semibold">What you can build</h1>
+<h1 class="mt-2 text-3xl font-semibold">What You Can Build</h1>
 <p class="mt-2 max-w-2xl text-muted">
 	Calculators, trackers, spreadsheets, charts, read save files and more.
 </p>
@@ -28,5 +28,5 @@
 	Example product on this package:
 	<a href={LINKS.tracker}>The Tower Run Tracker</a>
 	·
-	<a href={href('/ai/')}>AI &amp; AGS →</a>
+	<a href={href('/ai/')}>AI &amp; ACS →</a>
 </p>

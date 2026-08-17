@@ -18,7 +18,7 @@
 	<CodeBlock code={`npm install thetowersdk@${SDK_VERSION}`} />
 </div>
 
-<h2 class="mt-10 text-xl font-medium">Entry points</h2>
+<h2 class="mt-10 text-xl font-medium">Entry Points</h2>
 <ul class="mt-3 list-disc space-y-1 pl-5 text-sm text-muted">
 	<li><code>thetowersdk/data</code> — catalogs and tables</li>
 	<li><code>thetowersdk/save</code> — extractors over a decoded save</li>
@@ -29,7 +29,7 @@
 </ul>
 
 <p class="mt-8 text-sm">
-	<a href={href('/start/')}>Guided get-started →</a>
+	<a href={href('/start/')}>Guided Get-started →</a>
 	·
-	<a href={href('/docs/data/')}>Game data →</a>
+	<a href={href('/docs/data/')}>Game Data →</a>
 </p>
